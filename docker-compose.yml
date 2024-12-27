@@ -8,7 +8,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu] # Habilita o uso de GPU
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
