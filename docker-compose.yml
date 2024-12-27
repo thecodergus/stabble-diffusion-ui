@@ -1,0 +1,20 @@
+
+services:
+  stable-diffusion:
+    build:
+      context: .
+      dockerfile: python.dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu] # Habilita o uso de GPU
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
